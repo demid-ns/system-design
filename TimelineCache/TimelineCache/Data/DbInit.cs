@@ -6,9 +6,9 @@ namespace TimelineCache.Data
     public static class DbInit
     {
         const int BatchSize = 1000;
-        const int TotalUsers = 10000;
-        const int TotalPosts = 10000;
-        const int MaxSubscriptions = 10000;
+        const int TotalUsers = 100000;
+        const int TotalPosts = 100000;
+        const int MaxSubscriptions = 100000;
 
         private static readonly ILogger _logger;
 
