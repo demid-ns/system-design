@@ -12,5 +12,8 @@ namespace TimelineCache.Models
         [Required]
         [Column("name")]
         public string Name { get; set; }
+        public ICollection<Subscription> Followers { get; set; }
+        public ICollection<Subscription> Following { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

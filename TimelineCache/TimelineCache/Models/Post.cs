@@ -15,7 +15,6 @@ namespace TimelineCache.Models
         [Required]
         [Column("author_id")]
         public int AuthorId { get; set; }
-        [Required]
         public User Author { get; set; }
     }
 }

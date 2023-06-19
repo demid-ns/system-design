@@ -10,14 +10,12 @@ namespace TimelineCache.Models
         [Column("id")]
         public int Id { get; set; }
         [Required]
-        [Column("subscriber_id")]
-        public int SubscriberId { get; set; }
+        [Column("follower_id")]
+        public int FollowerId { get; set; }
+        public User Follower { get; set; }
         [Required]
-        public User Subscriber { get; set; }
-        [Required]
-        [Column("author_id")]
-        public int AuthorId { get; set; }
-        [Required]
-        public User Author { get; set; }
+        [Column("following_id")]
+        public int FollowingId { get; set; }
+        public User Following { get; set; }
     }
 }
