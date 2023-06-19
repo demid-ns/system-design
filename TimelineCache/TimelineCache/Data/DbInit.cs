@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using TimelineCache.Models;
 
 namespace TimelineCache.Data
@@ -109,15 +110,16 @@ namespace TimelineCache.Data
 
             for (int i = 1; i <= MaxSubscriptions; i++)
             {
-                int subscriberId = userIds[random.Next(userIds.Count)]; // Randomly select a subscriber
-                int authorId = userIds[random.Next(userIds.Count)]; // Randomly select an author
+                // Randomly select a follower and following
+                int followerId = userIds[random.Next(userIds.Count)]; 
+                int followingId = userIds[random.Next(userIds.Count)];
 
-                if (subscriberId != authorId) // Ensure the subscriber is not the same as the author
+                if(followerId != followingId)
                 {
                     var subscription = new Subscription
                     {
-                        SubscriberId = subscriberId,
-                        AuthorId = subscriberId
+                        FollowerId = followerId,
+                        FollowingId = followingId
                     };
                     subscriptions.Add(subscription);
                 }
@@ -129,6 +131,8 @@ namespace TimelineCache.Data
                     subscriptions.Clear();
                 }
             }
+            context.Subscriptions.AddRange(subscriptions);
+            context.SaveChanges();
         }
     }
 }
