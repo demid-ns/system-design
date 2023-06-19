@@ -48,21 +48,21 @@ namespace TimelineCache.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    subscriber_id = table.Column<int>(type: "integer", nullable: false),
-                    author_id = table.Column<int>(type: "integer", nullable: false)
+                    follower_id = table.Column<int>(type: "integer", nullable: false),
+                    following_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_subscription", x => x.id);
                     table.ForeignKey(
-                        name: "FK_subscription_user_author_id",
-                        column: x => x.author_id,
+                        name: "FK_subscription_user_follower_id",
+                        column: x => x.follower_id,
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_subscription_user_subscriber_id",
-                        column: x => x.subscriber_id,
+                        name: "FK_subscription_user_following_id",
+                        column: x => x.following_id,
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -74,14 +74,14 @@ namespace TimelineCache.Migrations
                 column: "author_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_subscription_author_id",
+                name: "IX_subscription_follower_id",
                 table: "subscription",
-                column: "author_id");
+                column: "follower_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_subscription_subscriber_id",
+                name: "IX_subscription_following_id",
                 table: "subscription",
-                column: "subscriber_id");
+                column: "following_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

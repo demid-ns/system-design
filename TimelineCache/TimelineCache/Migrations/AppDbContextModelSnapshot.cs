@@ -55,19 +55,19 @@ namespace TimelineCache.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int>("FollowerId")
                         .HasColumnType("integer")
-                        .HasColumnName("author_id");
+                        .HasColumnName("follower_id");
 
-                    b.Property<int>("SubscriberId")
+                    b.Property<int>("FollowingId")
                         .HasColumnType("integer")
-                        .HasColumnName("subscriber_id");
+                        .HasColumnName("following_id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("FollowerId");
 
-                    b.HasIndex("SubscriberId");
+                    b.HasIndex("FollowingId");
 
                     b.ToTable("subscription", (string)null);
                 });
@@ -94,7 +94,7 @@ namespace TimelineCache.Migrations
             modelBuilder.Entity("TimelineCache.Models.Post", b =>
                 {
                     b.HasOne("TimelineCache.Models.User", "Author")
-                        .WithMany()
+                        .WithMany("Posts")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -104,21 +104,30 @@ namespace TimelineCache.Migrations
 
             modelBuilder.Entity("TimelineCache.Models.Subscription", b =>
                 {
-                    b.HasOne("TimelineCache.Models.User", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
+                    b.HasOne("TimelineCache.Models.User", "Follower")
+                        .WithMany("Followers")
+                        .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TimelineCache.Models.User", "Subscriber")
-                        .WithMany()
-                        .HasForeignKey("SubscriberId")
+                    b.HasOne("TimelineCache.Models.User", "Following")
+                        .WithMany("Following")
+                        .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Author");
+                    b.Navigation("Follower");
 
-                    b.Navigation("Subscriber");
+                    b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("TimelineCache.Models.User", b =>
+                {
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
+
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }
