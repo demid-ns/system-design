@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using TimelineCache.Data;
+using TimelineCache.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services
+    .AddScoped<ITimelineService, TimelineService>()
+    .AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
