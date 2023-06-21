@@ -30,5 +30,14 @@ namespace TimelineCache.Controllers
 
             return userDto;
         }
+
+        [HttpGet("user-most-followings")]
+        public ActionResult<UserReadDto> GetUserWithMostFollowings()
+        {
+            var user = _timelineService.GetUserWithMostFollowings();
+            var userDto = _mapper.Map<UserReadDto>(user);
+
+            return userDto;
+        }
     }
 }
