@@ -26,13 +26,13 @@ namespace TimelineCache.Data
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Followers)
-                .WithOne(uf => uf.Follower)
-                .HasForeignKey(uf => uf.FollowerId);
+                .WithOne(uf => uf.Following)
+                .HasForeignKey(uf => uf.FollowingId);
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Following)
-                .WithOne(uf => uf.Following)
-                .HasForeignKey(uf => uf.FollowingId);
+                .WithOne(uf => uf.Follower)
+                .HasForeignKey(uf => uf.FollowerId);
         }
     }
 }

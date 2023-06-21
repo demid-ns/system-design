@@ -11,8 +11,8 @@ using TimelineCache.Data;
 namespace TimelineCache.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230619182541_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230621194846_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,13 +107,13 @@ namespace TimelineCache.Migrations
             modelBuilder.Entity("TimelineCache.Models.Subscription", b =>
                 {
                     b.HasOne("TimelineCache.Models.User", "Follower")
-                        .WithMany("Followers")
+                        .WithMany("Following")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TimelineCache.Models.User", "Following")
-                        .WithMany("Following")
+                        .WithMany("Followers")
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

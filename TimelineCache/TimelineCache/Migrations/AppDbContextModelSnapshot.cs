@@ -105,13 +105,13 @@ namespace TimelineCache.Migrations
             modelBuilder.Entity("TimelineCache.Models.Subscription", b =>
                 {
                     b.HasOne("TimelineCache.Models.User", "Follower")
-                        .WithMany("Followers")
+                        .WithMany("Following")
                         .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("TimelineCache.Models.User", "Following")
-                        .WithMany("Following")
+                        .WithMany("Followers")
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
