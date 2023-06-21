@@ -16,5 +16,10 @@ namespace TimelineCache.Services
         {
             return _userRepository.GetUserWithMostFollowers();
         }
+
+        public User GetUserWithMostFollowings()
+        {
+            return _userRepository.GetUserWithMostFollowings();
+        }
     }
 }
