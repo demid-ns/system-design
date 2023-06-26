@@ -6,5 +6,6 @@ namespace TimelineCache.Data
     {
         User GetUserWithMostFollowers();
         User GetUserWithMostFollowings();
+        User GetUserById(int id);
     }
 }

@@ -1,10 +1,12 @@
-﻿using TimelineCache.Models;
+﻿using TimelineCache.DTOs;
+using TimelineCache.Models;
 
 namespace TimelineCache.Services
 {
     public interface ITimelineService
     {
-        User GetUserWithMostFollowers();
-        User GetUserWithMostFollowings();
+        UserReadDto GetUserWithMostFollowers();
+        UserReadDto GetUserWithMostFollowings();
+        void Subscribe(SubscriptionCreateDto subscription);
     }
 }
