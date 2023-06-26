@@ -11,7 +11,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddScoped<ITimelineService, TimelineService>()
-    .AddScoped<IUserRepository, UserRepository>();
+    .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<ITimelineValidationService, TimelineValidationService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
