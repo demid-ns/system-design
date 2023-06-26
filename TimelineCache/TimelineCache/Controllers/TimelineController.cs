@@ -11,33 +11,40 @@ namespace TimelineCache.Controllers
     public class TimelineController : ControllerBase
     {
         private readonly ITimelineService _timelineService;
-        private readonly IMapper _mapper;
+        private readonly ITimelineValidationService _timelineValidationService;
 
         public TimelineController(
             ITimelineService timelineService,
-            IMapper mapper
+            ITimelineValidationService timelineValidationService
             )
         {
             _timelineService = timelineService;
-            _mapper = mapper;
+            _timelineValidationService = timelineValidationService;
         }
 
         [HttpGet("user-most-followers")]
         public ActionResult<UserReadDto> GetUserWithMostFollowers()
         {
-            var user = _timelineService.GetUserWithMostFollowers();
-            var userDto = _mapper.Map<UserReadDto>(user);
-
-            return userDto;
+            return _timelineService.GetUserWithMostFollowers(); ;
         }
 
         [HttpGet("user-most-followings")]
         public ActionResult<UserReadDto> GetUserWithMostFollowings()
         {
-            var user = _timelineService.GetUserWithMostFollowings();
-            var userDto = _mapper.Map<UserReadDto>(user);
+            return _timelineService.GetUserWithMostFollowings();
+        }
 
-            return userDto;
+        [HttpPut("subscribe")]
+        public ActionResult<UserReadDto> Subscribe(
+            [FromBody] SubscriptionCreateDto dto
+            )
+        {
+            _timelineValidationService.ValidateSubscription(ModelState, dto);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            _timelineService.Subscribe(dto);
+
+            return NoContent();
         }
     }
 }
