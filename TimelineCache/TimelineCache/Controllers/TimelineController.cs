@@ -22,6 +22,12 @@ namespace TimelineCache.Controllers
             _timelineValidationService = timelineValidationService;
         }
 
+        [HttpGet("user/{id}")]
+        public ActionResult<UserReadDto> GetUserById(int id)
+        {
+            return _timelineService.GetUserById(id);
+        }
+
         [HttpGet("user-most-followers")]
         public ActionResult<UserReadDto> GetUserWithMostFollowers()
         {
