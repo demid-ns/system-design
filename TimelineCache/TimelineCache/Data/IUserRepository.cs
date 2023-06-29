@@ -4,8 +4,9 @@ namespace TimelineCache.Data
 {
     public interface IUserRepository
     {
+        User GetUserById(int id);
         User GetUserWithMostFollowers();
         User GetUserWithMostFollowings();
-        User GetUserById(int id);
+        int SaveChanges();
     }
 }

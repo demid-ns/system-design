@@ -18,6 +18,13 @@ namespace TimelineCache.Services
             _mapper = mapper;
         }
 
+        public UserReadDto GetUserById(int id)
+        {
+            var user = _userRepository.GetUserById(id);
+            var userDto = _mapper.Map<UserReadDto>(user);
+            return userDto;
+        }
+
         public UserReadDto GetUserWithMostFollowers()
         {
             var user = _userRepository.GetUserWithMostFollowers();
@@ -32,9 +39,14 @@ namespace TimelineCache.Services
             return userDto;
         }
 
-        public void Subscribe(SubscriptionCreateDto subscription)
+        public void Subscribe(SubscriptionCreateDto dto)
         {
-            throw new NotImplementedException();
+            var subscription = _mapper.Map<Subscription>(dto);
+
+            var follower = _userRepository.GetUserById(subscription.FollowerId);
+            follower.Followings.Add(subscription);
+
+            _userRepository.SaveChanges();
         }
     }
 }

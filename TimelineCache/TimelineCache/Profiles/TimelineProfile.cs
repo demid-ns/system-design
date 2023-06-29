@@ -12,6 +12,7 @@ namespace TimelineCache.Profiles
             CreateMap<User, UserReadDto>();
             CreateMap<Subscription, SubscriptionReadDto>();
             CreateMap<Post, PostReadDto>();
+            CreateMap<SubscriptionCreateDto, Subscription>();
         }
     }
 }

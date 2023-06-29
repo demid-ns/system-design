@@ -30,7 +30,7 @@ namespace TimelineCache.Data
                 .HasForeignKey(uf => uf.FollowingId);
 
             modelBuilder.Entity<User>()
-                .HasMany(u => u.Following)
+                .HasMany(u => u.Followings)
                 .WithOne(uf => uf.Follower)
                 .HasForeignKey(uf => uf.FollowerId);
         }

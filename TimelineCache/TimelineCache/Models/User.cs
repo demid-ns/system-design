@@ -13,7 +13,7 @@ namespace TimelineCache.Models
         [Column("name")]
         public string Name { get; set; }
         public ICollection<Subscription> Followers { get; set; }
-        public ICollection<Subscription> Following { get; set; }
+        public ICollection<Subscription> Followings { get; set; }
         public ICollection<Post> Posts { get; set; }
     }
 }
