@@ -22,6 +22,12 @@ namespace TimelineCache.Controllers
             _timelineValidationService = timelineValidationService;
         }
 
+        [HttpGet("{userId}")]
+        public ActionResult<IEnumerable<PostReadDto>> GetUserTimeline(int userId)
+        {
+            return Ok(_timelineService.GetUserTimeline(userId));
+        }
+
         [HttpGet("user/{id}")]
         public ActionResult<UserReadDto> GetUserById(int id)
         {
@@ -40,7 +46,7 @@ namespace TimelineCache.Controllers
             return _timelineService.GetUserWithMostFollowings();
         }
 
-        [HttpPut("subscribe")]
+        [HttpPost("subscribe")]
         public ActionResult<UserReadDto> Subscribe(
             [FromBody] SubscriptionCreateDto dto
             )

@@ -18,6 +18,21 @@ namespace TimelineCache.Services
             _mapper = mapper;
         }
 
+        public IEnumerable<PostReadDto> GetUserTimeline(int userId)
+        {
+            var user = _userRepository.GetUserById(userId);
+            var posts = new List<PostReadDto>();
+
+            foreach (var subscription in user.Followings)
+            {
+                var following = _userRepository.GetUserById(subscription.FollowingId);
+                var followingPosts = _mapper.Map<IEnumerable<PostReadDto>>(following.Posts);
+                posts.AddRange(followingPosts);
+            }
+
+            return posts;
+        }
+
         public UserReadDto GetUserById(int id)
         {
             var user = _userRepository.GetUserById(id);
