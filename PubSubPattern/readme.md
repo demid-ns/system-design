@@ -1,4 +1,4 @@
-## Setup PostgreSQL database, pgadmin4, and redis containers
+## Setup PostgreSQL database and pgadmin4 containers
 
 Run `docker-compose -p pubsub up -d`
 
